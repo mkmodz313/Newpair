@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vercel Pair Code</title>
+    <style>
+        body { background: #000; color: #0f0; font-family: monospace; text-align: center; padding: 50px; }
+        input { padding: 10px; width: 200px; background: #222; color: #0f0; border: 1px solid #0f0; }
+        button { padding: 10px; background: #0f0; color: #000; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>Pairing Code Generator</h1>
+    <input type="number" id="phone" placeholder="923331234567">
+    <button onclick="getPair()">Get Code</button>
+    <h2 id="code"></h2>
+    <script>
+        async function getPair() {
+            const num = document.getElementById('phone').value;
+            document.getElementById('code').innerText = "Loading...";
+            const res = await fetch('/api/pair?phone=' + num);
+            const data = await res.json();
+            document.getElementById('code').innerText = data.code || data.error;
+        }
+    </script>
+</body>
+</html>
